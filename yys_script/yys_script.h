@@ -5,6 +5,7 @@
 
 #include "FSM.h"
 #include "ui_yys_script.h"
+
 //1，开始都要先定义个钩子
 static HHOOK hook;
 
@@ -29,7 +30,17 @@ private slots:
 	/**
 	 * \brief 
 	 */
-	void on_ExploreButton_clicked() const;
+	void on_ExploreButton_clicked();
+
+	void on_screenShotsButton_clicked() const;
+
+	void on_stopButton_clicked() const;
+
+	void on_breakthrough_ticket_item_num_changed(int n_i) const;
+	
+protected:
+
+	void closeEvent(QCloseEvent* event) override;
 	
 private:
 	
@@ -38,4 +49,6 @@ private:
 	HWND hd_;
 
 	FSM* fsm_;
+
+	BreakthroughTicketItem* breakthrough_ticket_item_{nullptr};
 };

@@ -2,10 +2,11 @@
 #include <QThread>
 #include "Enum.h"
 #include <Windows.h>
-
+#include "ItemManger.h"
+#include <vector>
 class FSM: public QThread
 {
-	
+	Q_OBJECT
 public:
 	/**
 	 * \brief 
@@ -15,18 +16,27 @@ public:
 	
 	void run() override;
 
-	void SetTransition(Transition transition);
+	void set_explore_chapter(const QString chapter);
+
+	void add_item_monitor(ItemBase* item);
+	/**
+	 * \brief 
+	 * \param transition 
+	 */
+	void SetTransition(transition::Transition transition);
 signals:
 	void MessageSignal(QString &msg);
 private:
 
-	void Explore() const;
+	void Explore();
 
 	auto send_click(QPoint& pos) const -> void;
 	
 	/**
 	 * \brief 
 	 */
-	Transition transition_;
+	transition::Transition transition_;
 	HWND hd_;
+	QString chapter_str_;
+	std::vector<ItemBase*> item_bases_;
 };
